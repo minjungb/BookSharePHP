@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <html lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
@@ -8,23 +9,25 @@
     <meta charset="UTF-8">
     <title>Book Share Sample Site</title>
 </head>
-<body style="font-family: 'Raleway'; background-color:#DED29E">
+<body id="mainPageBody" style="font-family: 'Raleway'; background-color:#DED29E">
+    $('#mainPageBody').html(
+    <?php
+        if(isset($_SESSION['user']) && isset($_SESSION['pw'])){
+            echo "You are currently logged in.";
+    }
+    ?>);
     <!-- Navigation bar on top -->
     <!--@TODO Make header appear on mobile devices, fix weird nav menu on smaller screens. -->
     <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom:0">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">BookShare</a>
+                <a class="navbar-brand" href="index.php">BookShare</a>
             </div>
 
             <!--@TODO Replace # with links to appropriate pages-->
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="#">Available Books</a></li>
-                <li><a href="#">List a Book</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Register</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="postings.php">Available Books</a></li>
+                <li><a href="newpost.php">List a Book</a></li>
             </ul>
         </div>
     </nav>
@@ -33,20 +36,22 @@
         <h1>BookShare.</h1>
         <h4>Share books, make money</h4>
         <br/>
-        <form action="dbConnect.php" method="POST">
-            <div class="container">
-                <label><b>Username</b></label>
-                <input type="text" placeholder="Username" name="username" required>
-                <br/><br/>
-                <label><b>Password</b></label>
-                <input type="password" placeholder="Password" name="password" required>
-                <br/><br/>
-                <button type="submit" class="btn btn-warning">Login</button>
-                <br/><br/>
-                <a href="register.html"><button type="button" class="btn btn-warning" style="font-size:9px">Don't have a Login? Register Here</button></a>
+            <div id="loginForm">
+                <form action="dbConnect.php" method="POST">
+                    <div class="container">
+                        <label><b>Username</b></label>
+                        <input type="text" placeholder="Username" name="username" required>
+                         <br/><br/>
+                        <label><b>Password</b></label>
+                        <input type="password" placeholder="Password" name="password" required>
+                        <br/><br/>
+                        <button type="submit" class="btn btn-warning">Login</button>
+                        <br/><br/>
+                        <a href="register.html"><button type="button" class="btn btn-warning" style="font-size:9px">Don't have a Login? Register Here</button></a>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
 
 
     <br/>

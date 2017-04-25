@@ -1,0 +1,15 @@
+*{
+    font-family: 'Raleway'
+}
+body{
+    background-color: #DED29E;
+    text-align: center;
+}
+#content{
+    margin: 100px auto;
+}
+.post{
+    border: 1px solid grey;
+    background: #FFFFFF;
+    margin-bottom: 20px
+}
