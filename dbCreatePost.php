@@ -13,6 +13,6 @@
     }else{
         echo "<script>alert('Post Created!')</script>";
         header('Location: http://localhost/School/is1059/FinalProject/userpage.php');
-        die();
+
     }
     mysqli_close($connection);

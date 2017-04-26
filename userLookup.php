@@ -1,4 +1,9 @@
-<?php include('dbConnect.php') ?>
+<?php
+if(!isset($_SESSION)){
+    session_start();
+}
+include('dbConnect.php')
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,35 +29,21 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="userBooks.php">Your Books</a></li>
-            <li><a href="userLookup.php">User Lookup</a></li>
             <li><a href="index.php">Logout</a></li>
         </ul>
     </div>
 </nav>
 <div class="container-fluid" id="content">
-    <div class="well well-sm" style="background-color:#B7C68B">
-        <h2 style="color:#685642">Welcome to BookShare, <?php echo " {$_SESSION['user']} " ?> !</h2></div>
     <br/>
-    <h3 style="color:#685642">What would you like to do?</h3><br/><br/>
-    <div class="row">
-        <div class="col-md-4">
-            <form action="postings.php">
-                <input class="btn btn-success" type="submit" value="View current postings" style="width:300px; height:100px"/>
-            </form>
-        </div>
+    <h3 style="color:#685642">User Lookup</h3><br/><br/>
+    <p>Enter a username to look up the rating of that user!</p>
+    <form id="userLookup" action="lookup.php" method="POST">
+        <input type="textbox" name="lookup" placeholder="Enter username here" required/><br/><br/>
+        <br/>
+        <input type="submit" name="submit-post" id="createPost" class="btn btn-warning" value="Submit">
+    </form>
 
-        <div class="col-md-4">
-            <form action="review.php">
-                <input class="btn btn-success" type="submit" value="Leave a Review" style="width:300px; height:100px"/>
-            </form>
-        </div>
 
-        <div class="col-md-4">
-            <form action="newpost.php">
-                <input class="btn btn-success" type="submit" value="Create a Post" style="width:300px; height:100px"/>
-            </form>
-        </div>
-    </div>
 
 
 

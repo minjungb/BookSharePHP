@@ -1,4 +1,8 @@
-<?php include('dbConnect.php') ?>
+<?php
+    if(!isset($_SESSION)){
+    session_start();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,36 +28,39 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="userBooks.php">Your Books</a></li>
-            <li><a href="userLookup.php">User Lookup</a></li>
             <li><a href="index.php">Logout</a></li>
         </ul>
     </div>
 </nav>
 <div class="container-fluid" id="content">
     <div class="well well-sm" style="background-color:#B7C68B">
-        <h2 style="color:#685642">Welcome to BookShare, <?php echo " {$_SESSION['user']} " ?> !</h2></div>
+        <h2 style="color:#685642">Your Listed Books</h2></div>
     <br/>
-    <h3 style="color:#685642">What would you like to do?</h3><br/><br/>
-    <div class="row">
-        <div class="col-md-4">
-            <form action="postings.php">
-                <input class="btn btn-success" type="submit" value="View current postings" style="width:300px; height:100px"/>
-            </form>
-        </div>
+    <?php
+        include 'dbConnect.php';
 
-        <div class="col-md-4">
-            <form action="review.php">
-                <input class="btn btn-success" type="submit" value="Leave a Review" style="width:300px; height:100px"/>
-            </form>
-        </div>
+        $searchBook = "SELECT * FROM book, user, post WHERE bookID = post.fk_bookID AND userID = post.fk_userID AND userID = {$_SESSION['userId']}";
+        $runQuery = mysqli_query($connection, $searchBook);
+        $check_query = mysqli_num_rows($runQuery);
+        $num = 0;
+        if($check_query > 0){
+            while($row = mysqli_fetch_assoc($runQuery)){
+                echo "<p>";
+                echo ++$num;
+                echo "<br/>";
+                echo "Title: {$row['title']}<br/>";
+                echo "Author: {$row['author']}<br/>";
+                echo "ISBN: {$row['isbn']} <br/>";
+                echo "Description {$row['description']}<br/>";
+                echo "</p>";
+                echo "-----------------------------------------";
+            }
+        }else{
+            echo "No books found.";
+        }
 
-        <div class="col-md-4">
-            <form action="newpost.php">
-                <input class="btn btn-success" type="submit" value="Create a Post" style="width:300px; height:100px"/>
-            </form>
-        </div>
-    </div>
-
+        mysqli_close($connection);
+    ?>
 
 
 

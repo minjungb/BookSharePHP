@@ -1,4 +1,9 @@
-<?php include('dbConnect.php') ?>
+<?php
+    if(!isset($_SESSION)){
+        session_start();
+    }
+    include('dbConnect.php')
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +29,6 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="userBooks.php">Your Books</a></li>
-            <li><a href="userLookup.php">User Lookup</a></li>
             <li><a href="index.php">Logout</a></li>
         </ul>
     </div>
@@ -33,26 +37,22 @@
     <div class="well well-sm" style="background-color:#B7C68B">
         <h2 style="color:#685642">Welcome to BookShare, <?php echo " {$_SESSION['user']} " ?> !</h2></div>
     <br/>
-    <h3 style="color:#685642">What would you like to do?</h3><br/><br/>
-    <div class="row">
-        <div class="col-md-4">
-            <form action="postings.php">
-                <input class="btn btn-success" type="submit" value="View current postings" style="width:300px; height:100px"/>
-            </form>
-        </div>
-
-        <div class="col-md-4">
-            <form action="review.php">
-                <input class="btn btn-success" type="submit" value="Leave a Review" style="width:300px; height:100px"/>
-            </form>
-        </div>
-
-        <div class="col-md-4">
-            <form action="newpost.php">
-                <input class="btn btn-success" type="submit" value="Create a Post" style="width:300px; height:100px"/>
-            </form>
-        </div>
+    <h3 style="color:#685642">Who would you like to leave a review for?</h3><br/><br/>
+    <div class="rating">
+        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
     </div>
+
+    <form id="reviewForm" action="dbReview.php" method="POST">
+    <input type="textbox" name="reviewUsername" placeholder="Enter username here" required/><br/><br/>
+        <span id="leaveReview">
+            Enter Rating (1= bad, 5= excellent)<br/>
+            <input type="number" name="rating" min="1" max="5" required/>
+        </span>
+        <br/><br/>
+        <input type="submit" name="submit-post" id="createPost" class="btn btn-warning" value="Submit Review">
+    </form>
+
+
 
 
 
