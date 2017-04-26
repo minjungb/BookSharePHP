@@ -17,14 +17,12 @@
     }
     ?>);
     <!-- Navigation bar on top -->
-    <!--@TODO Make header appear on mobile devices, fix weird nav menu on smaller screens. -->
     <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom:0">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="index.php">BookShare</a>
             </div>
 
-            <!--@TODO Replace # with links to appropriate pages-->
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="postings.php">Available Books</a></li>
                 <li><a href="newpost.php">List a Book</a></li>
@@ -37,7 +35,7 @@
         <h4>Share books, make money</h4>
         <br/>
             <div id="loginForm">
-                <form action="dbConnect.php" method="POST">
+                <form action="dbLogin.php" method="POST">
                     <div class="container">
                         <label><b>Username</b></label>
                         <input type="text" placeholder="Username" name="username" required>
